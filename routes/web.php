@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +17,34 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/info/{tipo?}', function($tipo = null){
+    //dd($tipo);
+
+    $otra = 'algo';
+    return view('informacion', compact('tipo', 'otra'));
+    //return view('informacion', ['tipo' => $tipo, 'otra' => $otra]);
+    // return view('informacion')
+    //     ->with('tipo',$tipo)
+    //     ->with('otra',$otra);
+});
+
+Route::get('/contacto', function(){
+    return view('contacto');
+});
+
+Route::post('/contacto_guardar', function(Request $request){
+    dd($request->all(), $request->nombre, $request->correo);
+    //Recibir datos
+    $nombre = $request->nombre;
+    $correo = $request->correo;
+    $comentario = $request->comentario;
+    //Validad
+
+    //Guardar
+
+    //Redireccionar
+    return "Si llegue la ruta";
+
 });
