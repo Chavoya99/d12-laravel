@@ -9,7 +9,7 @@
     <a href="/info">Información</a>
     <hr>
     <h1>Contacto</h1>
-    <form action="/contacto_guardar" method="POST">
+    <form action="{{route('comentario.store')}}" method="POST">
         @csrf
         <label for="nombre">Nombre</label>
         <input type="text" name="nombre">
