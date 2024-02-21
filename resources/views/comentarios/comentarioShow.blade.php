@@ -6,6 +6,7 @@
     <title>Detalle del comentario</title>
 </head>
 <body>
+    <a href="{{route('comentario.index')}}">Inicio</a>
     <h1>Detalle del comentario</h1>
     <ul>
         <li>Nombre: {{$comentario->nombre}}</li>
