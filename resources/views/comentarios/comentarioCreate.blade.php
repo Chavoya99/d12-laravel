@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contacto</title>
-</head>
-<body>
+<x-mi-layout titulo="Nuevo comentario">
     <a href="/info">Información</a>
     <hr>
     <h1>Comentario</h1>
-    @include('parciales.form-error')
+    @include('comentarios.parciales.form-error')
     <form action="{{route('comentario.store')}}" method="POST">
         @csrf
         <label for="nombre">Nombre</label>
@@ -43,6 +36,4 @@
         <br>
         <input type="submit" value="enviar">
     </form>
-
-</body>
-</html>
+</x-mi-layout>
