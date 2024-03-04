@@ -29,7 +29,8 @@ Route::get('/info/{tipo?}', [SitioController::class, 'info']);
 // Route::get('/comentario/create', [ComentarioController::class, 'create']);
 // Route::post('/comentario_guardar', [ComentarioController::class, 'store']);
 
-Route::resource('comentario', ComentarioController::class);
+Route::resource('comentario', ComentarioController::class)->middleware('auth');
+
 Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),

@@ -1,7 +1,6 @@
 <x-mi-layout titulo="Nuevo comentario">
     <a href="/info">Información</a>
     <hr>
-    <h1>Comentario</h1>
     @include('comentarios.parciales.form-error')
     <form action="{{route('comentario.store')}}" method="POST">
         @csrf

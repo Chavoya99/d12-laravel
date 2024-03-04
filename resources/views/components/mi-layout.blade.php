@@ -344,10 +344,18 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
+                                <form method="POST" action="{{ route('logout') }}" x-data>
+                                    @csrf
+                                    
+                                    <a class="dropdown-item" href="{{route('logout')}}"
+                                        @click.prevent="$root.submit();">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Salir
+                                    </a>
+                                    
+
+                                </form>
+                                
                             </div>
                         </li>
 
@@ -419,7 +427,7 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{asset('js/sb-admin-2.min.js')}}"></script>
-
+    @livewireScripts
 </body>
 
 </html>
