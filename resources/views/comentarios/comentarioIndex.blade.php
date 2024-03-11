@@ -13,8 +13,8 @@
         <tbody>
             @foreach ($comentarios as  $comentario)
                 <tr>
-                    <td>{{$comentario->nombre}}</td>
-                    <td>{{$comentario->correo}}</td>
+                    <td>{{$comentario->user->name}}</td>
+                    <td>{{$comentario->user->email}}</td>
                     <td>{{$comentario->ciudad}}</td>
                     <td>{{$comentario->created_at}}</td>
                     <td>
