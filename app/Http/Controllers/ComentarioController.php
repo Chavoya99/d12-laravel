@@ -21,7 +21,7 @@ class ComentarioController extends Controller
     {   
         // $comentarios=Comentario::all();
         // $comentarios=Comentario::where('user_id', Auth::id())->get();
-        // $comentarios = Auth::user()->comentarios;
+        $comentarios = Auth::user()->comentarios;
         
         return view('comentarios.comentarioIndex', compact('comentarios'));
     }

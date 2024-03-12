@@ -1,6 +1,7 @@
 <x-mi-layout titulo="Listado comentarios">
     <a class="btn btn-primary" href="{{route('comentario.create')}}">Nuevo comentario</a>
-    <table border="1">
+    <br><br>
+    <table class="table">
         <thead>
             <tr>
                 <th>Nombre</th>
@@ -23,7 +24,7 @@
                         <form action="{{route('comentario.destroy', $comentario)}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <input type="submit" value="Eliminar">
+                            <input class="btn btn-danger"type="submit" value="Eliminar">
                         </form>
                         
                     </td>
