@@ -11,7 +11,7 @@ class Comentario extends Model
 
     //Lista de campos manipulables
     //Las que sí puede manipular
-    protected $fillable = ['nombre', 'correo', 'comentario', 'ciudad', 'user_id'];
+    protected $fillable = [ 'comentario', 'ciudad', 'user_id'];
 
     //Las que no puede manipular
     //protected $guarded = [ 'id', 'created_at', 'updated_at']; 
