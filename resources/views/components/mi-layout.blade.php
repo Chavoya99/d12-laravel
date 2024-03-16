@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Blank</title>
+    <title>{{$titulo}}</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
@@ -344,11 +344,10 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <form method="POST" action="{{ route('logout') }}" x-data>
+                                <form id="logout-form" method="POST" action="{{ route('logout') }}" x-data>
                                     @csrf
-                                    
                                     <a class="dropdown-item" href="{{route('logout')}}"
-                                        @click.prevent="$root.submit();">
+                                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Salir
                                     </a>
