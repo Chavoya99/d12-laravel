@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Comentario;
+use App\Models\Materia;
 use App\Models\User;
 use Carbon\Factory;
 use Illuminate\Database\Seeder;
@@ -29,5 +30,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             AlumnoSeeder::class,
         ]);
+
+        Materia::factory(10)->create();
+        
     }
 }

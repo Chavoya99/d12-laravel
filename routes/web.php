@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AlumnoController;
 use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\SitioController;
 use App\Models\Comentario;
@@ -44,3 +45,8 @@ Route::middleware([
 Route::get('/admin/usuario/demo', function(){
     return view('demo');
 });
+
+Route::resource('alumno', AlumnoController::class);
+
+Route::get('/alumno/{alumno}/agendar-materia', [AlumnoController::class, 'agendarMateria'])->name('alumno.agendar-materia');
+Route::post('alumno/{alumno}/relacionar-materia-alumno', [AlumnoController::class, 'relacionarMateriaConAlumno'])->name('alumno.relacionar-materia-alumno');
