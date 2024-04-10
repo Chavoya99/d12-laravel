@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Comentario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ComentarioController extends Controller
 {
@@ -21,8 +22,8 @@ class ComentarioController extends Controller
     {   
         // $comentarios=Comentario::all();
         // $comentarios=Comentario::where('user_id', Auth::id())->get();
-        $comentarios = Auth::user()->comentarios;
-        
+        //$comentarios = Auth::user()->comentarios;
+        $comentarios = Comentario::all();
         return view('comentarios.comentarioIndex', compact('comentarios'));
     }
 
@@ -82,7 +83,14 @@ class ComentarioController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit(Comentario $comentario)
-    {
+    {   
+        // if (! Gate::allows('editar-comentario', $comentario)) {
+        //     abort(403);
+        // }
+
+        //Gate::authorize('editar-comentario', $comentario);
+        $this->authorize('update', $comentario);
+ 
        return view('comentarios.comentarioEdit', compact('comentario'));
     }
 
@@ -91,6 +99,7 @@ class ComentarioController extends Controller
      */
     public function update(Request $request, Comentario $comentario)
     {   
+        $this->authorize('update', $comentario);
         $request->validate(
             [
                 'nombre'=>'required|max:10',
@@ -117,6 +126,7 @@ class ComentarioController extends Controller
      */
     public function destroy(Comentario $comentario)
     {
+        $this->authorize('delete', $comentario);
         $comentario->delete();
         return redirect()->route('comentario.index');
     }

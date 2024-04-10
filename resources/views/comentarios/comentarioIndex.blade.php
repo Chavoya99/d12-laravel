@@ -19,13 +19,18 @@
                     <td>{{$comentario->ciudad}}</td>
                     <td>{{$comentario->created_at}}</td>
                     <td>
-                        <a href="{{route('comentario.show', $comentario)}}">Detalle</a> |
-                        <a href="{{route('comentario.edit', $comentario)}}">Editar</a> |
-                        <form action="{{route('comentario.destroy', $comentario)}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input class="btn btn-danger"type="submit" value="Eliminar">
-                        </form>
+                        <a href="{{route('comentario.show', $comentario)}}">Detalle</a>
+                        @can('update', $comentario)
+                            |<a href="{{route('comentario.edit', $comentario)}}">Editar</a> |
+                        @endcan
+                        @can('delete', $comentario)
+                            <form action="{{route('comentario.destroy', $comentario)}}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <input class="btn btn-danger"type="submit" value="Eliminar">
+                            </form>
+                        @endcan
+                        
                         
                     </td>
                     
