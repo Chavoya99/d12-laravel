@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\NotificaMaterias;
 use App\Models\Alumno;
 use App\Models\Materia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class AlumnoController extends Controller
 {
@@ -74,10 +76,13 @@ class AlumnoController extends Controller
     }
 
     public function relacionarMateriaConAlumno(Request $request, Alumno $alumno){
+        
         $materia_id = $request->materia_id;
         $alumno_id= $alumno->id;
 
         $alumno->materias()->sync($materia_id);
+
+        Mail::to($alumno->correo)->send(new NotificaMaterias($alumno));
 
         return redirect()->route('alumno.show', $alumno_id);
     }
