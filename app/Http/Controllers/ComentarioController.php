@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Archivo;
 use App\Models\Comentario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,7 +24,9 @@ class ComentarioController extends Controller
         // $comentarios=Comentario::all();
         // $comentarios=Comentario::where('user_id', Auth::id())->get();
         //$comentarios = Auth::user()->comentarios;
-        $comentarios = Comentario::all();
+        //$comentarios = Comentario::all();
+
+        $comentarios =  Comentario::with('user')->limit(5)->get();
         return view('comentarios.comentarioIndex', compact('comentarios'));
     }
 
@@ -46,25 +49,32 @@ class ComentarioController extends Controller
         //Validar
         $request->validate(
             [
-                'nombre'=>'required|max:10',
-                'correo'=> ['required', 'email', 'max:255'],
+                // 'nombre'=>'required|max:10',
+                // 'correo'=> ['required', 'email', 'max:255'],
                 'comentario' => ['required', 'min:10'],
                 'ciudad'=> 'required',
+                //'archivo' => 'required',
 
             ]
         );
 
+        $request->merge(['user_id' => Auth::id()]);
+        $comentario = Comentario::create($request->all());
 
-        //Guardar
-        // $comentario = new Comentario();
-        // $comentario->user_id = auth()->id();
-        // $comentario->nombre=$request->nombre;
-        // $comentario->correo=$request->correo;
-        // $comentario->comentario = $request->comentario;
-        // $comentario->ciudad = $request->ciudad;
-        // $comentario->save();
-        $request->merge(['user_id'=> Auth::id()]);
-        Comentario::create($request->all());
+        if($request->hasFile('archivo')){
+            if ($request->file('archivo')->isValid()) {
+
+                $comentario->archivos()->create(
+                    [
+                        'ubicacion' => $request->archivo->store('archivos_comentarios', 'public'),
+                        'nombre_original' => $request->archivo->getClientOriginalName(),
+                        'mime' => $request->file('archivo')->getClientMimeType(),
+                    ]
+                    );
+                
+            }
+        }
+        
         
         //Redireccionar
         return redirect()->route('comentario.index');
@@ -129,5 +139,9 @@ class ComentarioController extends Controller
         $this->authorize('delete', $comentario);
         $comentario->delete();
         return redirect()->route('comentario.index');
+    }
+
+    public function download(Archivo $archivo){
+        return response()->download(storage_path('app/public/' . $archivo->ubicacion) , $archivo->nombre_original);
     }
 }

@@ -14,5 +14,17 @@
         <li>Comentario: {{$comentario->comentario}}</li>
         <li>Ciudad: {{$comentario->ciudad}}</li>
     </ul>
+
+    <h1>Archivos</h1>
+    <ul>
+        @foreach ($comentario->archivos as $archivo )
+            <li>
+                <a href="{{route('archivo.download', $archivo)}}">
+                    {{$archivo->nombre_original}}
+                    <img src="{{asset(\Storage::url($archivo->ubicacion))}}" alt="" width="300px">
+                </a>
+            </li>
+        @endforeach
+    </ul>
 </body>
 </html>

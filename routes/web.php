@@ -31,6 +31,7 @@ Route::get('/info/{tipo?}', [SitioController::class, 'info']);
 // Route::post('/comentario_guardar', [ComentarioController::class, 'store']);
 
 Route::resource('comentario', ComentarioController::class)->middleware('auth');
+Route::get('/comentario/download/{archivo}', [ComentarioController::class, 'download'])->name('archivo.download');
 
 Route::middleware([
     'auth:sanctum',
@@ -50,3 +51,4 @@ Route::resource('alumno', AlumnoController::class);
 
 Route::get('/alumno/{alumno}/agendar-materia', [AlumnoController::class, 'agendarMateria'])->name('alumno.agendar-materia');
 Route::post('alumno/{alumno}/relacionar-materia-alumno', [AlumnoController::class, 'relacionarMateriaConAlumno'])->name('alumno.relacionar-materia-alumno');
+

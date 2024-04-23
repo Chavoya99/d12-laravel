@@ -1,8 +1,8 @@
 <x-mi-layout titulo="Nuevo comentario">
     <a href="/info">Información</a>
     <hr>
-    @include('comentarios.parciales.form-error')
-    <form action="{{route('comentario.store')}}" method="POST">
+    {{--@include('comentarios.parciales.form-error')--}}
+    <form action="{{route('comentario.store')}}" method="POST"  enctype="multipart/form-data" >
         @csrf
         <label for="nombre">Nombre</label>
         <input type="text" name="nombre" value="{{old('nombre')}}">
@@ -30,6 +30,12 @@
             <option value="TONALÁ" @selected(old('ciudad')== 'TONALÁ')>Tonalá</option>
         </select>
         @error('ciudad')
+            <div class="alert alert-danger">{{ $message }}</div>
+        @enderror
+        <br>
+
+        <input type="file" name="archivo" value="{{old('archivo')}}">
+        @error('archivo')
             <div class="alert alert-danger">{{ $message }}</div>
         @enderror
         <br>
