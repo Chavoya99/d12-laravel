@@ -29,9 +29,7 @@
                                 @method('DELETE')
                                 <input class="btn btn-danger"type="submit" value="Eliminar">
                             </form>
-                        @endcan
-                        
-                        
+                        @endcan  
                     </td>
                     
                 </tr> 

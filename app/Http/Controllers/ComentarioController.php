@@ -26,7 +26,7 @@ class ComentarioController extends Controller
         //$comentarios = Auth::user()->comentarios;
         //$comentarios = Comentario::all();
 
-        $comentarios =  Comentario::with('user')->limit(5)->get();
+        $comentarios =  Comentario::with('user')->get();
         return view('comentarios.comentarioIndex', compact('comentarios'));
     }
 
@@ -49,11 +49,11 @@ class ComentarioController extends Controller
         //Validar
         $request->validate(
             [
-                // 'nombre'=>'required|max:10',
-                // 'correo'=> ['required', 'email', 'max:255'],
+                'nombre'=>'required|max:10',
+                'correo'=> ['required', 'email', 'max:255'],
                 'comentario' => ['required', 'min:10'],
                 'ciudad'=> 'required',
-                //'archivo' => 'required',
+                'archivo' => 'required',
 
             ]
         );

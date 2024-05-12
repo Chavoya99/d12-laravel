@@ -86,4 +86,5 @@ class AlumnoController extends Controller
 
         return redirect()->route('alumno.show', $alumno_id);
     }
+    
 }
